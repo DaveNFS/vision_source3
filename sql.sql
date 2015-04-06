@@ -10,3 +10,15 @@ INSERT INTO `conditions` (`id`, `code_and_name`) VALUES
 (3, 'H52.12 - Myopia, left eye'),
 (4, 'H52.4 - Presbyopia'),
 (5, 'H53.021 - Refractive amblyopia, right eye'); 
+
+
+CREATE TABLE `login` (
+	`id` int(20) NOT NULL auto_increment,
+	`email` varchar(200) NOT NULL,
+	`password` varchar(100) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+INSERT INTO `login` (`email`, `password`) VALUES
+('abc@abc.com', '123'),
+('def@def.com', '123');
