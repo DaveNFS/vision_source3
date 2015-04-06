@@ -1,0 +1,79 @@
+<html>
+<head>
+	<title> Vision Source </title>
+	<script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>        
+	<!--
+	// Google's CDN used for jQuery
+	// TODO: save a local copy of jQuery
+	-->
+
+	<script type="text/javascript" src="jquery.autocomplete.js"></script>
+	<link rel="stylesheet" type="text/css" href="jquery.autocomplete.css" />
+
+	<script type="text/javascript">
+	$(function() {
+		var addDiv = $('#addinput');
+		var i = $('#addinput p').size() + 1;
+
+		$('#addNew').live('click', function() {
+			$('<p><input type="text" id="answer" class="moreOption" size="40" name="selection_' + i +'" value="" placeholder="Add answer..." /><a href="#" id="remNew">Remove</a> </p>').appendTo(addDiv);
+			i++;
+
+			// add the autocomplete functionality to new inputs (like document.ready())
+					$(".moreOption").autocomplete("autocomplete.php", {
+						selectFirst: true
+					});
+
+			return false;
+		});
+
+		$('#remNew').live('click', function() {
+			if( i > 2 ) {
+				$(this).parents('p').remove();
+				i--;
+			}
+			return false;
+		});
+	});
+
+	</script>
+
+
+	<script>
+	$(document).ready(function(){
+		$("#answer").autocomplete("autocomplete.php", {
+			selectFirst: true
+		});
+	});
+	</script>
+
+</head>
+<body>
+	<h2>Choose one or more options</h2>
+
+	<div class="question">
+	<h4> <font color="blue">
+    Case 1: 45 YO WF
+	<br> CC: blurred vision
+	<br> HPI: distance and near, right eye worse, glasses help, has gotten slightly better
+	<br> Medical Hx: unremarkable
+	<br> Ocular Hx: unremarkable
+	<br> Manifest: OD: +3.00 -1.00 X 175 DS, OS -0.50 -1.00 X 005, Add +1.50 OU
+	<br> BVA (distance): OD: 20/40, OS 20/20
+	<br> External: unremarkable
+	<br> Internal: unremarkable
+	How would you code this case? 
+	</font></h4>
+	</div>
+
+	<form action="two.php" method="post">
+		<div id="addinput">
+			<p>
+				<input type="text" id="answer" size="40" name="selection_1" value="" placeholder="Your choice" /><a href="#" id="addNew">Add</a>
+			</p>
+		</div>
+	<input type="submit">
+	</form>
+
+</body>
+</html>
