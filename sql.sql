@@ -21,4 +21,5 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`email`, `password`) VALUES
 ('abc@abc.com', '123'),
-('def@def.com', '123');
+('def@def.com', '123'),
+('xyz@xyz.com', 'abc');
