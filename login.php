@@ -1,10 +1,24 @@
 <html>
 <head> 
-	<title>Vision Source</title>
+<meta charset="utf-8">
+  <title>Vision Source</title>
+
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="Skeleton/css/normalize.css">
+  <link rel="stylesheet" href="Skeleton/css/skeleton.css">
+
+
+
 </head>
 
 
-<body>
+<body style="margin:25px">
 <?php
 
 //error_reporting(E_ERROR | E_PARSE);
@@ -133,13 +147,13 @@
 
 
 
-
+echo "<br><br><br>&nbsp&nbsp";
 
 
 if($show_button)
 {
 	echo '<form action="question.php?q=1" method="post">'
-		.'<input type="submit" vlaue="submit"> Next Question </input></form>';
+		.'<input class="button-primary" type="submit" value="GET STARTED"></input></form>';
 }
 
 

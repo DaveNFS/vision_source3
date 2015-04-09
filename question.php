@@ -1,6 +1,18 @@
 <html>
 <head>
-	<title> Vision Source </title>
+	  <meta charset="utf-8">
+  <title>Vision Source</title>
+
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="Skeleton/css/normalize.css">
+  <link rel="stylesheet" href="Skeleton/css/skeleton.css">
+
 	<script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>        
 	<!--
 	// Google's CDN used for jQuery
@@ -16,7 +28,7 @@
 		var i = $('#addinput p').size() + 1;
 
 		$('#addNew').live('click', function() {
-			$('<p><input type="text" id="answer" class="moreOption" size="40" name="selection_' + i +'" value="" placeholder="Add answer..." /><a href="#" id="remNew">Remove</a> </p>').appendTo(addDiv);
+			$('<p><input type="text" id="answer" class="moreOption" size="40" name="selection_' + i +'" value="" placeholder="Add answer..." /><a href="#" id="remNew"> REMOVE</a> </p>').appendTo(addDiv);
 			i++;
 
 			// add the autocomplete functionality to new inputs (like document.ready())
@@ -47,10 +59,12 @@
 	});
 	</script>
 
+
+
 </head>
 
 
-<body>
+<body style="margin:25px">
 
 <?php
     // define custom function 
@@ -217,9 +231,9 @@ if($previous_question > 0)
 
 <form action="question.php?q=<?php echo $next_question; ?>" method="post">
 	<div id="addinput">
-		<input type="text" id="answer" size="40" name="selection_0" value="" placeholder="Your choice" /><a href="#" id="addNew">Add</a>	
+		<input type="text" id="answer" size="40" name="selection_0" value="" placeholder="Your choice" /><a href="#" id="addNew"> ADD</a>	
 	</div>
-	<input type="submit" vlaue="submit"> Next Question </input>
+	<input type="submit" value="Next Question"></input>
 </form>
 
 
