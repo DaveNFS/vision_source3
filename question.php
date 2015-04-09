@@ -75,6 +75,7 @@
 	$next_question = $current_question + 1; 
 
 
+	// debug
 	echo "current question"; 
 	echo $current_question;
 	echo "<br>";
@@ -94,6 +95,7 @@
 			$actual_answers = explode(',', $row['answers']);
 		}
 
+		// debug
 		echo "acutal answer";
 		var_dump($actual_answers);
 		echo "<br>";
@@ -105,12 +107,11 @@
 	{
 		if(startsWith($key, "selection_"))
 		{
-			echo "selection: ".$value."<br>";
 
 			// get all the id from 'conditions' table:
 			$sql_name_answers = "SELECT id FROM conditions WHERE code_and_name="."'$value'";
 			$sql_name_answers_result = mysqli_query($mysqli,$sql_name_answers) or die(mysqli_error($mysqli));
-			while($row=mysqli_fetch_array($sql_answers_results))
+			while($row=mysqli_fetch_array($sql_name_answers_result))
 			{
 				array_push($your_answers, $row['id']);
 			}
@@ -118,24 +119,82 @@
 
 	}
 
+	// debug
 	echo "your answer";
 	var_dump($your_answers);
 	echo "<br>";
 
 	// populate correct answer: 
+	$correct_answers = array_intersect($actual_answers, $your_answers);
 
+	// populate incorrect answers: (also includes unanswered)
+	$temp_one = array_diff($actual_answers, $your_answers); 
+	$temp_two = array_diff($your_answers, $actual_answers);
+	$incorrect_answers = array_merge($temp_one, $temp_two);
 
 
 
 
 ?>
 
-<div id="result">
+<div id="correct_result">
+<?php
+if($previous_question > 0)
+{
+	echo '<font face="Comic Sans MS" size="5" color="green"><strong>Correct choices: </strong></font>';
+}
+?>
+<br>
+<font color="green">
+<ul>
+<?php
+	foreach($correct_answers as $value)
+	{
+		$sql_get_name = "SELECT code_and_name FROM conditions WHERE id=".$value;
+		$sql_get_name_result = mysqli_query($mysqli,$sql_get_name) or die(mysqli_error($mysqli));
+		while($row=mysqli_fetch_array($sql_get_name_result))
+		{
+			echo "<li>";
+			echo $row['code_and_name'];
+			echo "</li>";
 
+		}
+	}
+
+?>
+</ul>
+</font>
 </div>
 
 
-<div id="question">
+<div id="incorrect_result">
+<?php
+if($previous_question > 0)
+{
+	echo '<font face="Comic Sans MS" size="5" color="red"><strong>Incorrect choices: </strong></font>';
+}
+?>
+<br>
+<font color="red">
+<ul>
+<?php
+	foreach($incorrect_answers as $value)
+	{
+		$sql_get_name = "SELECT code_and_name FROM conditions WHERE id=".$value;
+		$sql_get_name_result = mysqli_query($mysqli,$sql_get_name) or die(mysqli_error($mysqli));
+		while($row=mysqli_fetch_array($sql_get_name_result))
+		{
+			echo "<li>";
+			echo $row['code_and_name'];
+			echo "</li>";
+
+		}
+	}
+
+?>
+</ul>
+</font>
+
 
 </div>
 
