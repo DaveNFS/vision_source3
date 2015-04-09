@@ -76,9 +76,9 @@
 
 
 	// debug
-	echo "current question"; 
-	echo $current_question;
-	echo "<br>";
+	// echo "current question"; 
+	// echo $current_question;
+	// echo "<br>";
 
 	$actual_answers = array();
 	$your_answers = array();
@@ -96,9 +96,9 @@
 		}
 
 		// debug
-		echo "acutal answer";
-		var_dump($actual_answers);
-		echo "<br>";
+		// echo "acutal answer";
+		// var_dump($actual_answers);
+		// echo "<br>";
 	}
 
 
@@ -120,9 +120,9 @@
 	}
 
 	// debug
-	echo "your answer";
-	var_dump($your_answers);
-	echo "<br>";
+	// echo "your answer";
+	// var_dump($your_answers);
+	// echo "<br>";
 
 	// populate correct answer: 
 	$correct_answers = array_intersect($actual_answers, $your_answers);
@@ -194,12 +194,25 @@ if($previous_question > 0)
 ?>
 </ul>
 </font>
-
-
 </div>
 
 
 <br><br><br> 
+
+
+<div id="next question" background-color="blue">
+<font size="5" color="brown"><strong> Question: </strong></font>
+<font size="3">
+<?php
+	$sql_get_current_question = "SELECT question FROM questions WHERE id=".$current_question;
+	$sql_get_current_question_result =  mysqli_query($mysqli,$sql_get_current_question) or die(mysqli_error($mysqli));
+	while ($row=mysqli_fetch_array($sql_get_current_question_result)) 
+	{
+		echo $row['question'];
+	}
+?>
+</font>
+</div>
 
 
 <form action="question.php?q=<?php echo $next_question; ?>" method="post">
@@ -208,6 +221,8 @@ if($previous_question > 0)
 	</div>
 	<input type="submit" vlaue="submit"> Next Question </input>
 </form>
+
+
 
 
 </body>
