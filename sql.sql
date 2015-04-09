@@ -23,3 +23,15 @@ INSERT INTO `login` (`email`, `password`) VALUES
 ('abc@abc.com', '123'),
 ('def@def.com', '123'),
 ('xyz@xyz.com', 'abc');
+
+
+CREATE TABLE `questions` (
+	`id` int(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`question` VARCHAR(255) NOT NULL,
+	`answers` VARCHAR(255) NOT NULL,
+	`extra_description` TEXT
+);
+
+INSERT INTO `questions` (`question`, `answers`) VALUES
+('Question 1', '1,2,3'),
+('Question 2', '4,5');

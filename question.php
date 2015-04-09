@@ -65,22 +65,64 @@
 
 
 <?php
+
+
+	// TODO: make config file to remove credentials from code
+	$mysqli=mysqli_connect('localhost','root','','vision_source') or die("Database Error");
 	
 	$current_question = $_GET["q"];
 	$previous_question = $current_question - 1; 
 	$next_question = $current_question + 1; 
 
 
+	echo "current question"; 
 	echo $current_question;
+	echo "<br>";
 
+	$actual_answers = array();
+	$your_answers = array();
+	$correct_answers = array();
+	$incorrect_answers = array();
+
+	// get acutal answer to previous question: 
+	if($previous_question > 0)
+	{
+		$sql_answers = "SELECT answers FROM questions WHERE id=".$previous_question;
+		$sql_answers_results = mysqli_query($mysqli,$sql_answers) or die(mysqli_error($mysqli));
+		while($row=mysqli_fetch_array($sql_answers_results))
+		{
+			$actual_answers = explode(',', $row['answers']);
+		}
+
+		echo "acutal answer";
+		var_dump($actual_answers);
+		echo "<br>";
+	}
+
+
+	// get your answers to previous question: 
 	foreach($_POST as $key => $value)
 	{
 		if(startsWith($key, "selection_"))
 		{
+			echo "selection: ".$value."<br>";
 
+			// get all the id from 'conditions' table:
+			$sql_name_answers = "SELECT id FROM conditions WHERE code_and_name="."'$value'";
+			$sql_name_answers_result = mysqli_query($mysqli,$sql_name_answers) or die(mysqli_error($mysqli));
+			while($row=mysqli_fetch_array($sql_answers_results))
+			{
+				array_push($your_answers, $row['id']);
+			}
 		}
 
 	}
+
+	echo "your answer";
+	var_dump($your_answers);
+	echo "<br>";
+
+	// populate correct answer: 
 
 
 
@@ -91,6 +133,7 @@
 <div id="result">
 
 </div>
+
 
 <div id="question">
 
