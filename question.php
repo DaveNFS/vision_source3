@@ -88,6 +88,23 @@
 	$previous_question = $current_question - 1; 
 	$next_question = $current_question + 1; 
 
+	 
+
+	// redirecting if current question is greater than last question!
+	$sql_last_question = "SELECT MAX(id) FROM questions";
+	$sql_last_question_answer = mysqli_query($mysqli,$sql_last_question) or die(mysqli_error($mysqli));
+	while($row=mysqli_fetch_array($sql_last_question_answer))
+	{
+		$last_question = $row['MAX(id)'];
+	}	
+
+	if($current_question > $last_question)
+	{
+		// TODO: Add finishing up code here.
+		
+		header("Location: done.php");
+		exit();
+	}
 
 	// debug
 	// echo "current question"; 
